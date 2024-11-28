@@ -25,17 +25,27 @@ Ensure you have the following installed:
   ```
 
 - [PostgreSQL](https://www.postgresql.org/download/) (make sure your database server is running)
+  - Create a database of name `pvx`
 
 ### Configuration
 
 Configure your `config/config.json` file (located in the root directory) with your PostgreSQL database connection details:
 
 ```properties
- "username": "yourusername",
- "password": "yourpassword",
- "database": "yourdatabase",
- "host": "localhost",
- "dialect": "postgres"
+  "development": {
+    "username": "yourusername",
+    "password": "yourpassword",
+    "database": "pvx",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+```
+
+### Run
+
+```bash
+sequelize db:migrate
+sequelize db:seed:all
 ```
 
 ## Sequelize Commands
