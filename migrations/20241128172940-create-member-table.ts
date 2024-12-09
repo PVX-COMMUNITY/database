@@ -1,26 +1,25 @@
-"use strict";
+import { DataTypes, QueryInterface, Sequelize } from "sequelize";
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface: QueryInterface, Sequelize: Sequelize) {
     await queryInterface.createTable("member", {
       uuid: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         defaultValue: Sequelize.fn("gen_random_uuid"),
         primaryKey: true,
         allowNull: false,
       },
       memberjid: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         unique: true,
         allowNull: false,
       },
       name: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       donation: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         defaultValue: 0,
         allowNull: false,
         validate: {
@@ -28,27 +27,27 @@ module.exports = {
         },
       },
       badges: {
-        type: Sequelize.ARRAY(Sequelize.TEXT),
+        type: DataTypes.ARRAY(DataTypes.TEXT),
         allowNull: false,
         defaultValue: [],
       },
       role: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
         defaultValue: "member",
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: Sequelize.fn("now"),
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: Sequelize.fn("now"),
       },
     });
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface: QueryInterface) {
     await queryInterface.dropTable("member");
   },
 };

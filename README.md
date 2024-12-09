@@ -55,7 +55,7 @@ Here are some essential Sequelize commands for managing your database migrations
 - **Migrate**: Apply all pending migrations to the database.
 
   ```bash
-  sequelize db:migrate
+  sequelize db:migrate --env development
   ```
 
 - **Undo**: Revert the last migration.

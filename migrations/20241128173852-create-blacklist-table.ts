@@ -1,17 +1,17 @@
-"use strict";
+import { DataTypes, QueryInterface, Sequelize } from "sequelize";
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+// /** @type {import('sequelize-cli').Migration} */
+export default {
+  async up(queryInterface: QueryInterface, Sequelize: Sequelize) {
     await queryInterface.createTable("blacklist", {
       uuid: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         defaultValue: Sequelize.fn("gen_random_uuid"),
         primaryKey: true,
         allowNull: false,
       },
       memberjid: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         unique: true,
         allowNull: false,
         references: {
@@ -22,25 +22,25 @@ module.exports = {
         onDelete: "CASCADE",
       },
       reason: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       admin: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: Sequelize.fn("now"),
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: Sequelize.fn("now"),
       },
     });
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface: QueryInterface, Sequelize: Sequelize) {
     await queryInterface.dropTable("blacklist");
   },
 };

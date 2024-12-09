@@ -1,17 +1,17 @@
-"use strict";
+import { DataTypes, QueryInterface, Sequelize } from "sequelize";
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+// /** @type {import('sequelize-cli').Migration} */
+export default {
+  async up(queryInterface: QueryInterface, Sequelize: Sequelize) {
     await queryInterface.createTable("count_member", {
       uuid: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         defaultValue: Sequelize.fn("gen_random_uuid"),
         primaryKey: true,
         allowNull: false,
       },
       memberjid: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
         references: {
           model: "member", // Refers to the 'member' table
@@ -21,7 +21,7 @@ module.exports = {
         onDelete: "CASCADE",
       },
       groupjid: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         allowNull: false,
         references: {
           model: "pvx_group", // Refers to the 'pvx_group' table
@@ -31,12 +31,12 @@ module.exports = {
         onDelete: "CASCADE",
       },
       message_count: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
       },
       warning_count: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
         validate: {
@@ -45,16 +45,16 @@ module.exports = {
         },
       },
       video_count: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: Sequelize.fn("now"),
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: Sequelize.fn("now"),
       },
     });
@@ -67,7 +67,7 @@ module.exports = {
     });
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface: QueryInterface, Sequelize: Sequelize) {
     await queryInterface.dropTable("count_member");
   },
 };

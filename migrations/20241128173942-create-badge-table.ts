@@ -1,38 +1,38 @@
-"use strict";
+import { DataTypes, QueryInterface, Sequelize } from "sequelize";
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up(queryInterface, Sequelize) {
+// /** @type {import('sequelize-cli').Migration} */
+export default {
+  async up(queryInterface: QueryInterface, Sequelize: Sequelize) {
     await queryInterface.createTable("badge", {
       uuid: {
-        type: Sequelize.UUID,
+        type: DataTypes.UUID,
         defaultValue: Sequelize.fn("gen_random_uuid"),
         primaryKey: true,
         allowNull: false,
       },
       sno: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
       badge_info: {
-        type: Sequelize.TEXT,
+        type: DataTypes.TEXT,
         unique: true,
         allowNull: false,
       },
       created_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: Sequelize.fn("now"),
       },
       updated_at: {
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: Sequelize.fn("now"),
       },
     });
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface: QueryInterface, Sequelize: Sequelize) {
     await queryInterface.dropTable("badge");
   },
 };
